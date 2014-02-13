@@ -1,5 +1,6 @@
 package com.espian.showcaseview;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -358,7 +359,8 @@ public class ShowcaseView extends RelativeLayout
         }
     }
 
-    public void setHardwareAccelerated(boolean accelerated) {
+    @SuppressLint("NewApi")
+	public void setHardwareAccelerated(boolean accelerated) {
         if (accelerated) {
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 				if (isHardwareAccelerated()) {
@@ -459,7 +461,8 @@ public class ShowcaseView extends RelativeLayout
                 listener).start();
     }
 
-    @Override
+    @SuppressLint("NewApi")
+	@Override
     public void onClick(View view) {
         // If the type is set to one-shot, store that it has shot
         if (mOptions.shotType == TYPE_ONE_SHOT) {
@@ -498,6 +501,12 @@ public class ShowcaseView extends RelativeLayout
     }
 
     public void show() {
+    	// Added to fix missing layoutparameter modification when usin ShowcaseViews
+    	if (mOptions.buttonLayoutParams != null && mEndButton != null && !mOptions.noButton) {
+    		LayoutParams lp = mOptions.buttonLayoutParams;
+    		LayoutParams mEndButtonLP = (LayoutParams) mEndButton.getLayoutParams();
+    		mEndButtonLP.setMargins(lp.leftMargin, lp.topMargin, lp.rightMargin, lp.bottomMargin);
+    	}
         mEventListener.onShowcaseViewShow(this);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB
                 && getConfigOptions().fadeInDuration > 0) {
