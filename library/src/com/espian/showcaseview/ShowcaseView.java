@@ -501,11 +501,14 @@ public class ShowcaseView extends RelativeLayout
     }
 
     public void show() {
-    	// Added to fix missing layoutparameter modification when usin ShowcaseViews
+    	// Added to fix missing LayoutParameter modification when using ShowcaseViews
     	if (mOptions.buttonLayoutParams != null && mEndButton != null && !mOptions.noButton) {
     		LayoutParams lp = mOptions.buttonLayoutParams;
     		LayoutParams mEndButtonLP = (LayoutParams) mEndButton.getLayoutParams();
-    		mEndButtonLP.setMargins(lp.leftMargin, lp.topMargin, lp.rightMargin, lp.bottomMargin);
+    		mEndButtonLP.setMargins( ((Number) (metricScale * lp.leftMargin)).intValue(),
+    								((Number) (metricScale * lp.topMargin)).intValue(),
+    								((Number) (metricScale * lp.rightMargin)).intValue(),
+    								((Number) (metricScale * lp.bottomMargin)).intValue() );
     	}
         mEventListener.onShowcaseViewShow(this);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB
