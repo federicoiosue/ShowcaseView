@@ -1,7 +1,7 @@
-apply plugin: 'android'
+apply plugin: 'com.android.application'
 
 dependencies {
-	compile project(':library')
+	compile project(':showcaseview')
 	compile 'com.android.support:support-v4:19.0.+'
 	compile 'com.nineoldandroids:library:2.4.0+'
     compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
@@ -9,7 +9,7 @@ dependencies {
 
 android {
 	compileSdkVersion 19
-	buildToolsVersion "19.0.0"
+	buildToolsVersion "19.1.0"
 
 	sourceSets {
 		main {
